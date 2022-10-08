@@ -48,15 +48,15 @@ public class ExcelSheetHandle extends BaseClass {
 		return sh;
 	}
 	
-	public Map<String, Object> getExcelSheetData(Sheet sh) {
+	public Object[][] getExcelSheetData(Sheet sh) {
 		
 		int getRow = sh.getLastRowNum();
-		Map<String, Object> data = null;		
+		Map<String, Object> finaldata = new HashMap<String, Object>();		
 		
 		Object obj[][] = new Object[getRow][1];
 		
 		for(int i=0; i<getRow; i++) {
-			 data = new HashMap<String, Object>();
+			Map<String, Object> data = new HashMap<String, Object>();
 			int col = sh.getRow(i).getLastCellNum();
 			
 			for(int j=0; j<col; j++) {
@@ -69,13 +69,11 @@ public class ExcelSheetHandle extends BaseClass {
 					data.put(sh.getRow(0).getCell(j).getStringCellValue(), 
 							sh.getRow(i+1).getCell(j).getNumericCellValue());
 				}
-				
+				obj[i][0]=data;
 			}
-			
-			System.out.println(data);
+			 
 		}
-		
-		return data;
+		return obj;
 	}
 	
 	public String getSingleStringVale(Sheet sh,int row, int col) {

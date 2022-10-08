@@ -34,20 +34,25 @@ public class PostApiAutomate{
 		
 	}
 	
-	
-	
-	@Test()
-	public void postTest() {
-		
-		baseURI = "http://localhost:3000";
-		
+	@DataProvider(name = "userdata")
+	public Object[][] usersData() {
 		ExcelSheetHandle excelSheetHandle = new ExcelSheetHandle();
 		
 		Sheet sh = excelSheetHandle.getSheet("user");
 		
+		return excelSheetHandle.getExcelSheetData(sh);
+	}
+	
+	
+	
+	@Test(dataProvider = "userdata")
+	public void postTest(HashMap<String, Object> data) {
+		
+		baseURI = "http://localhost:3000";
+		
 		JSONObject jsonObject = new JSONObject();
 		
-		Map<String, Object> data = excelSheetHandle.getExcelSheetData(sh);
+	
 		
 		jsonObject.putAll(data);
 		
