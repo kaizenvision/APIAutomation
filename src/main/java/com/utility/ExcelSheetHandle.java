@@ -71,8 +71,9 @@ public class ExcelSheetHandle extends BaseClass {
 				}
 				obj[i][0]=data;
 			}
-			 
+			data.forEach(finaldata::put);
 		}
+		
 		return obj;
 	}
 	
